@@ -68,15 +68,15 @@
         android:layout_alignParentLeft="true"
         android:onClick="onStartGame" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Undo"
-        android:id="@+id/button"
-        android:layout_toRightOf="@id/start_button"
-        android:layout_alignTop="@+id/start_button"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:onClick="onUndo" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Undo"-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_toRightOf="@id/start_button"-->
+        <!--android:layout_alignTop="@+id/start_button"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:onClick="onUndo" />-->
 
 </RelativeLayout>

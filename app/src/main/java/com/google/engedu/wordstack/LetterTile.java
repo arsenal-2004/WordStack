@@ -18,6 +18,7 @@ package com.google.engedu.wordstack;
 import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,19 +43,42 @@ public class LetterTile extends TextView {
         setBackgroundColor(Color.rgb(255, 255, 200));
     }
 
-    public void moveToViewGroup(ViewGroup targetView) {
+    public void moveToViewGroup(View targetView) {
         ViewParent parent = getParent();
         if (parent instanceof StackedLayout ) {
             StackedLayout owner = (StackedLayout) parent;
             owner.pop();
-            targetView.addView(this);
-            freeze();
+            ViewGroup t = (ViewGroup) targetView;
+            if (t.getChildCount() > 0) {
+                LetterTile tile = (LetterTile) t.getChildAt(t.getChildCount()-1);
+                tile.freeze();
+            }
+            t.addView(this);
+//            freeze();
+            unfreeze();
             setVisibility(View.VISIBLE);
         } else {
             ViewGroup owner = (ViewGroup) parent;
             owner.removeView(this);
-            ((StackedLayout) targetView).push(this);
-            unfreeze();
+            if (owner.getChildCount() > 0) {
+                LetterTile tile = (LetterTile) owner.getChildAt(owner.getChildCount()-1);
+                tile.unfreeze();
+            }
+            if (targetView instanceof StackedLayout) {
+                ((StackedLayout) targetView).push(this);
+                unfreeze();
+            }
+            else {
+                ViewGroup t = (ViewGroup) targetView;
+                if (t.getChildCount() > 0) {
+                    LetterTile tile = (LetterTile) t.getChildAt(t.getChildCount()-1);
+                    tile.freeze();
+                }
+                t.addView(this);
+//            freeze();
+                unfreeze();
+                setVisibility(View.VISIBLE);
+            }
         }
     }
 

@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout verticalLayout = (LinearLayout) findViewById(R.id.vertical_layout);
         stackedLayout = new StackedLayout(this);
         verticalLayout.addView(stackedLayout, 3);
+        stackedLayout.setOnDragListener(new DragListener());
         placedTiles = new Stack<>();
         word1LinearLayout = (LinearLayout) findViewById(R.id.word1);
 //        word1LinearLayout.setOnTouchListener(new TouchListener());
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
                     // Dropped, reassign Tile to the target Layout
                     LetterTile tile = (LetterTile) event.getLocalState();
-                    tile.moveToViewGroup((ViewGroup) v);
+                    tile.moveToViewGroup(v);
                     if (stackedLayout.empty()) {
                         TextView messageBox = (TextView) findViewById(R.id.message_box);
                         messageBox.setText(word1 + " " + word2);
